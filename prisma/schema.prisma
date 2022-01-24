@@ -1,0 +1,71 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Guide {
+  @@map(name: "guide")
+  id                     Int       @id @default(autoincrement())
+  title                  String
+  image                  String
+  description            String
+}
+
+model Quotation {
+  @@map(name: "quotation")
+  id                     Int       @id @default(autoincrement())
+  firstName              String    @map(name: "frist_name")
+  lastName               String    @map(name: "last_name")
+  email                  String
+  companyName            String    @map(name: "company_name")
+  companyAddress         String    @map(name: "company_address")
+  companyCity            String    @map(name: "company_city")
+  companyPostalCode      String    @map(name: "company_postal_code")
+  service                String
+  description            String
+}
+
+model User {
+  @@map(name: "user")
+  id                     Int       @id @default(autoincrement())
+  lastName               String    @map(name: "last_name")
+  firstName              String    @map(name: "first_name")
+  username               String
+  role                   String
+  email                  String
+  password               String
+  address                String
+  city                   String
+  postalCode             String    @map(name: "postal_code")
+  country                String
+  biography              String
+}
+
+model Product {
+  @@map(name: "product")
+  id                     Int        @id @default(autoincrement())
+  name                   String
+  description            String
+  price                  Int
+  image                  String
+  // RELATIONS
+  category               Category?  @relation(fields: [categoryId], references: [id])
+  categoryId             Int       @map(name: "category_id")
+}
+
+model Category {
+  @@map(name: "category")
+  id                     Int        @id @default(autoincrement())
+  name                   String
+  icone                  String
+  image                  String
+  // RELATIONS
+  product                Product?
+}
