@@ -2,20 +2,25 @@ import express from "express";
 import cors from "cors";
 import { PrismaClient } from "@prisma/client";
 import * as dotenv from "dotenv";
+// IMPORT ROUTES
+import productRoute from "../routes/Product";
 
 const app = express();
-
 dotenv.config();
 
 const port = process.env.HTTP_PORT || 8000;
 const allowedOrigins = ["http://localhost:3000"];
 const options: cors.CorsOptions = { origin: allowedOrigins };
+const prisma = new PrismaClient();
 
 const main = async () => {
   app.get("/", (req, res) => res.send("Express + TypeScript Server"));
 
   app.use(cors(options));
   app.use(express.json());
+
+  // ROUTES
+  app.use(productRoute);
 
   app.listen(port, () => {
     return console.log(
@@ -24,6 +29,10 @@ const main = async () => {
   });
 };
 
-main().catch((err) => {
-  throw err;
-});
+main()
+  .catch((err) => {
+    throw err;
+  })
+  .finally(async () => {
+    await prisma.$disconnect();
+  });
