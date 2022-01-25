@@ -3,8 +3,9 @@ import cors from "cors";
 import { PrismaClient } from "@prisma/client";
 import * as dotenv from "dotenv";
 // IMPORT ROUTES
-import productRoute from "../routes/Product";
-import categoryRoute from "../routes/Category";
+import productsRoute from "../routes/Products";
+import categoriesRoute from "../routes/Categories";
+import guidesRoute from "../routes/Guides";
 
 const app = express();
 dotenv.config();
@@ -21,8 +22,9 @@ const main = async () => {
   app.use(express.json());
 
   // ROUTES
-  app.use(productRoute);
-  app.use(categoryRoute);
+  app.use(productsRoute);
+  app.use(categoriesRoute);
+  app.use(guidesRoute);
 
   app.listen(port, () => {
     return console.log(
