@@ -4,6 +4,7 @@ import { PrismaClient } from "@prisma/client";
 import * as dotenv from "dotenv";
 // IMPORT ROUTES
 import productRoute from "../routes/Product";
+import categoryRoute from "../routes/Category";
 
 const app = express();
 dotenv.config();
@@ -21,6 +22,7 @@ const main = async () => {
 
   // ROUTES
   app.use(productRoute);
+  app.use(categoryRoute);
 
   app.listen(port, () => {
     return console.log(
