@@ -35,17 +35,20 @@ model Quotation {
 model User {
   @@map(name: "user")
   id                     Int       @id @default(autoincrement())
-  lastName               String    @map(name: "last_name")
-  firstName              String    @map(name: "first_name")
+  lastName               String?   @map(name: "last_name")
+  firstName              String?   @map(name: "first_name")
   username               String    @unique
-  role                   String
+  type                   String
   email                  String    @unique
   password               String
-  address                String
-  city                   String
-  postalCode             String    @map(name: "postal_code")
-  country                String
-  biography              String
+  address                String?
+  city                   String?
+  postalCode             String?   @map(name: "postal_code")
+  country                String?
+  biography              String?
+  admin                  Boolean   @default(value: false)
+  // RELATIONS
+  order                  Order?
 }
 
 model Product {
@@ -59,6 +62,7 @@ model Product {
   // RELATIONS
   category               Category?  @relation(fields: [categoryId], references: [id])
   categoryId             Int        @map(name: "category_id")
+  order                  Order?
 }
 
 model Category {
@@ -69,4 +73,17 @@ model Category {
   image                  String
   // RELATIONS
   product                Product?
+}
+
+model Order {
+  @@map(name: "order")
+  id                     Int        @id @default(autoincrement())
+  price                  Float
+  date                   DateTime
+  orderedQuantity        Int        @map(name: "ordered_quantity")
+  // RELATIONS
+  userId                 Int        @map(name: "user_id")
+  productId              Int        @map(name: "product_id")
+  product                Product?   @relation(fields: [productId], references: [id])
+  user                   User?      @relation(fields: [userId], references: [id])
 }
