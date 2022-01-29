@@ -2,11 +2,10 @@ import { Router } from "express";
 import { PrismaClient } from "@prisma/client";
 import jwt from "jsonwebtoken";
 import argon2 from "argon2";
+import { isAuthenticated } from '../src/middlewares/isAuthenticated';
 
 export const auth = Router();
 const prisma = new PrismaClient();
-
-// Voir les middlewares : https://www.youtube.com/watch?v=zgn7EhMgkIo&ab_channel=EternalProgramming
 
 auth.post("/api/login", async (req, res) => {
   const { email, password } = req.body;
@@ -67,6 +66,10 @@ auth.post("/api/register", async (req, res) => {
   const accessToken = jwt.sign({ userId: user.id }, "secret");
 
   return res.status(200).json({ success: true, accessToken: accessToken });
+});
+
+auth.get("/protected", isAuthenticated, {req, res} => {
+  res.send("protected");
 });
 
 export default auth;
