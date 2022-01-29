@@ -6,6 +6,7 @@ import * as dotenv from "dotenv";
 import productsRoute from "../routes/Products";
 import categoriesRoute from "../routes/Categories";
 import guidesRoute from "../routes/Guides";
+import { auth as authRoute } from "../routes/Auth";
 
 const app = express();
 dotenv.config();
@@ -25,6 +26,7 @@ const main = async () => {
   app.use(productsRoute);
   app.use(categoriesRoute);
   app.use(guidesRoute);
+  app.use(authRoute);
 
   app.listen(port, () => {
     return console.log(

@@ -38,7 +38,7 @@ model User {
   lastName               String?   @map(name: "last_name")
   firstName              String?   @map(name: "first_name")
   username               String    @unique
-  type                   String
+  type                   String?
   email                  String    @unique
   password               String
   address                String?
