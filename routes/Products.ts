@@ -23,4 +23,18 @@ router.get("/api/products", async (req: any, res: any) => {
   res.status(200).send(allProducts);
 });
 
+router.post(`/api/createProduct`, async (req: any, res: any) => {
+  const { name, description, image, price } = req.body;
+  const createProduct = await prisma.product.create({
+    data: {
+      name: name,
+      description: description,
+      image: image,
+      price: price,
+    },
+  });
+  res.json(createProduct);
+});
+
+
 export default router;

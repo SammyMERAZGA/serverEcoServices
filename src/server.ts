@@ -7,6 +7,9 @@ import productsRoute from "../routes/Products";
 import categoriesRoute from "../routes/Categories";
 import guidesRoute from "../routes/Guides";
 import { auth as authRoute } from "../routes/Auth";
+// BACK OFFICE ROUTES
+import userRoute from "../routes/User";
+import quotationRoute from "../routes/Quotation";
 
 const app = express();
 dotenv.config();
@@ -27,6 +30,10 @@ const main = async () => {
   app.use(categoriesRoute);
   app.use(guidesRoute);
   app.use(authRoute);
+
+  // BACK OFFICE
+  app.use(userRoute);
+  app.use(quotationRoute);
 
   app.listen(port, () => {
     return console.log(

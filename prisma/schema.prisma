@@ -21,8 +21,8 @@ model Guide {
 model Quotation {
   @@map(name: "quotation")
   id                     Int       @id @default(autoincrement())
-  firstName              String    @map(name: "frist_name")
-  lastName               String    @map(name: "last_name")
+  firstName              String?   @map(name: "first_name")
+  lastName               String?   @map(name: "last_name")
   email                  String
   companyName            String    @map(name: "company_name")
   companyAddress         String    @map(name: "company_address")
@@ -38,7 +38,7 @@ model User {
   lastName               String?   @map(name: "last_name")
   firstName              String?   @map(name: "first_name")
   username               String    @unique
-  type                   String?
+  type                   String
   email                  String    @unique
   password               String
   address                String?
@@ -61,7 +61,7 @@ model Product {
   quantity               Int        @default(1)
   // RELATIONS
   category               Category?  @relation(fields: [categoryId], references: [id])
-  categoryId             Int        @map(name: "category_id")
+  categoryId             Int?       @map(name: "category_id")
   order                  Order?
 }
 
@@ -82,8 +82,8 @@ model Order {
   date                   DateTime
   orderedQuantity        Int        @map(name: "ordered_quantity")
   // RELATIONS
-  userId                 Int        @map(name: "user_id")
-  productId              Int        @map(name: "product_id")
+  userId                 Int?       @map(name: "user_id")
+  productId              Int?       @map(name: "product_id")
   product                Product?   @relation(fields: [productId], references: [id])
   user                   User?      @relation(fields: [userId], references: [id])
 }

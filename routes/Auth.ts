@@ -39,7 +39,7 @@ auth.post("/api/login", async (req, res) => {
 });
 
 auth.post("/api/register", async (req, res) => {
-  const { email, username, password } = req.body;
+  const { email, username, password, type } = req.body;
 
   const result = await prisma.user.findUnique({
     where: {
@@ -57,6 +57,7 @@ auth.post("/api/register", async (req, res) => {
 
   const user = await prisma.user.create({
     data: {
+      type: type,
       email: email,
       username: username,
       password: hashedPassword,

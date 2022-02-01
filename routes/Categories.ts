@@ -16,4 +16,16 @@ router.get("/api/categories", async (req: any, res: any) => {
   res.status(200).send(allCategories);
 });
 
+router.post(`/api/createCategory`, async (req: any, res: any) => {
+  const { name, icone, image } = req.body;
+  const createCategory = await prisma.category.create({
+    data: {
+      name: name,
+      icone: icone,
+      image: image,
+    },
+  });
+  res.json(createCategory);
+});
+
 export default router;
