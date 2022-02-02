@@ -1,7 +1,6 @@
 import { Router } from "express";
 import { prisma } from "../config/prismaConfig";
 
-
 const router = Router();
 
 router.get("/api/users", async (req: any, res: any) => {
@@ -14,6 +13,24 @@ router.get("/api/users", async (req: any, res: any) => {
     },
   });
   res.status(200).send(allUsers);
+});
+
+router.get("/api/user", async (req: any, res: any) => {
+  const user = await prisma.user.findMany({
+    select: {
+      id: true,
+      username: true,
+      firstName: true,
+      lastName: true,
+      email: true,
+      address: true,
+      city: true,
+      postalCode: true,
+      country: true,
+      biography: true,
+    },
+  });
+  res.status(200).send(user);
 });
 
 // router.delete("/api/users/:id", async (req: any, res: any) => {

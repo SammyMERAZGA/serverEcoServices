@@ -10,14 +10,15 @@ router.get("/api/products", async (req: any, res: any) => {
       name: true,
       price: true,
       description: true,
+      description2: true,
       image: true,
       quantity: true,
-      category: {
-        select: {
-          name: true,
-          icone: true,
-        },
-      },
+      // category: {
+      //   select: {
+      //     name: true,
+      //     icone: true,
+      //   },
+      // },
     },
   });
   res.status(200).send(allProducts);
@@ -29,6 +30,7 @@ router.post(`/api/createProduct`, async (req: any, res: any) => {
     data: {
       name: name,
       description: description,
+      description2: description,
       image: image,
       price: price,
     },

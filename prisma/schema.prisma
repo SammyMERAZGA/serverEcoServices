@@ -56,24 +56,25 @@ model Product {
   id                     Int        @id @default(autoincrement())
   name                   String
   description            String
-  price                  Float
+  description2           String?
+  price                  Int
   image                  String
   quantity               Int        @default(1)
   // RELATIONS
-  category               Category?  @relation(fields: [categoryId], references: [id])
-  categoryId             Int?       @map(name: "category_id")
+  // category               Category?  @relation(fields: [categoryId], references: [id])
+  // categoryId             Int?       @map(name: "category_id")
   order                  Order?
 }
 
-model Category {
-  @@map(name: "category")
-  id                     Int        @id @default(autoincrement())
-  name                   String
-  icone                  String
-  image                  String
-  // RELATIONS
-  product                Product?
-}
+// model Category {
+//   @@map(name: "category")
+//   id                     Int        @id @default(autoincrement())
+//   name                   String
+//   icone                  String
+//   image                  String
+//   // RELATIONS
+//   product                Product?
+// }
 
 model Order {
   @@map(name: "order")

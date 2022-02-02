@@ -69,8 +69,4 @@ auth.post("/api/register", async (req, res) => {
   return res.status(200).json({ success: true, accessToken: accessToken });
 });
 
-// auth.get("/protected", isAuthenticated, {req, res} => {
-//   res.send("protected");
-// });
-
 export default auth;
