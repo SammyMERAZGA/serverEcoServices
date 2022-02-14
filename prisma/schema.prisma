@@ -34,7 +34,7 @@ model Quotation {
 
 model User {
   @@map(name: "user")
-  id                     Int       @id @default(autoincrement())
+  id                     Int       @id @default(autoincrement()) @map(name: "userId")
   lastName               String?   @map(name: "last_name")
   firstName              String?   @map(name: "first_name")
   username               String    @unique
@@ -67,15 +67,14 @@ model Product {
   order                  Order?
 }
 
-// model Category {
-//   @@map(name: "category")
-//   id                     Int        @id @default(autoincrement())
-//   name                   String
-//   icone                  String
-//   image                  String
-//   // RELATIONS
-//   product                Product?
-// }
+model Category {
+  @@map(name: "category")
+  id                     Int        @id @default(autoincrement())
+  name                   String
+  icone                  String
+  color                  String
+  url                    String
+}
 
 model Order {
   @@map(name: "order")

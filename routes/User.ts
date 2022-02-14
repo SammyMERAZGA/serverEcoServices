@@ -33,14 +33,14 @@ router.get("/api/user", async (req: any, res: any) => {
   res.status(200).send(user);
 });
 
-// router.delete("/api/users/:id", async (req: any, res: any) => {
-//   const { id } = req.params;
-//   const user = await prisma.user.delete({
-//     where: {
-//       id: id,
-//     },
-//   });
-//   res.status(200).send(user);
-// });
+router.delete("/api/user/:id", async (req: any, res: any) => {
+  const { id } = req.params;
+  const deleteUser = await prisma.user.delete({
+    where: {
+      id: id,
+    },
+  });
+  res.status(200).send(deleteUser);
+});
 
 export default router;
