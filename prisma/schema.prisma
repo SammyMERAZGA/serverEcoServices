@@ -34,7 +34,7 @@ model Quotation {
 
 model User {
   @@map(name: "user")
-  id                     Int       @id @default(autoincrement()) @map(name: "userId")
+  id                     Int       @id @default(autoincrement())
   lastName               String?   @map(name: "last_name")
   firstName              String?   @map(name: "first_name")
   username               String    @unique
