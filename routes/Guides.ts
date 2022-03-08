@@ -1,10 +1,11 @@
 import { Router } from "express";
 import { prisma } from "../config/prismaConfig";
+import isAuthenticated from '../src/middlewares/isAuthenticated';
 
 
 const router = Router();
 
-router.get("/api/guides", async (req: any, res: any) => {
+router.get("/api/guides", isAuthenticated, async (req: any, res: any) => {
   const allGuides = await prisma.guide.findMany({
     select: {
       id: true,
